@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loading.style.display = "block";
 
     // ✅ FIXED PATH
-    fetch(`Velocity%20Rentals/fetch_cars.php?offset=${offset}`)
+    fetch(`fetch_cars.php?offset=${offset}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -116,3 +116,4 @@ document.addEventListener("DOMContentLoaded", function () {
   moreBtn.addEventListener("click", fetchCars);
 
 });
+
