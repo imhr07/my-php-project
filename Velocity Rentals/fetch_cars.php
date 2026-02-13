@@ -17,12 +17,9 @@ $sql = "SELECT c.car_id,
         FROM cars c
         INNER JOIN agencies a ON c.agency_id = a.agency_id
         ORDER BY c.car_id ASC
-        LIMIT :offset, :limit";
+        LIMIT $offset, $limit";
 
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-$stmt->execute();
+$stmt = $conn->query($sql);
 
 $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
