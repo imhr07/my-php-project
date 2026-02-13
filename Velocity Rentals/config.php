@@ -1,12 +1,17 @@
 <?php
-$servername = "localhost";
+$servername = "shuttle.proxy.rlwy.net";
 $username = "root";
-$password = "";
-$dbname = "wheels_db";
+$password = "RBcFkmAKBSdPxDstXrxPQZoZDCEITXHt";
+$dbname = "railway";
+$port = 35739;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+echo "Connected successfully!";
+?>
