@@ -9,8 +9,10 @@ $sql = "SELECT c.car_id,
                c.body_type,
                c.fuel,
                c.transmission,
-               c.seating,
+               c.seating_capacity,
                c.vehicle_number,
+               c.rent_per_day,
+               c.images,
                a.name AS agency_name
         FROM cars c
         INNER JOIN agencies a ON c.agency_id = a.agency_id
