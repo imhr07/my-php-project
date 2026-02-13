@@ -11,13 +11,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loading.style.display = "block";
 
-    fetch(`fetch_cars.php?offset=${offset}`)
-      .then(response => response.json())
+    // ✅ FIXED PATH
+    fetch(`Velocity%20Rentals/fetch_cars.php?offset=${offset}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then(data => {
 
         loading.style.display = "none";
 
-        if (data.length === 0) {
+        if (!data || data.length === 0) {
           moreBtn.style.display = "none";
           return;
         }
@@ -26,11 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
           let rentSection = "";
 
-          // If customer logged in
-          if (isCustomerSession) {
+          if (typeof isCustomerSession !== "undefined" && isCustomerSession) {
 
             rentSection = `
-              <form action="customer/rent_car.php" method="POST" class="mt-3">
+              <form action="Velocity%20Rentals/customer/rent_car.php" method="POST" class="mt-3">
 
                 <input type="hidden" name="car_id" value="${car.car_id}">
 
@@ -57,12 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
           } else {
 
             rentSection = `
-              <a href="signin.php" class="rent-btn mt-3 d-block text-center">
+              <a href="Velocity%20Rentals/signin.php" class="rent-btn mt-3 d-block text-center">
                 <i class="fas fa-car"></i> Rent Now
               </a>
 
               <div class="login-text text-center">
-                Please <a href="signin.php">Login</a> to rent
+                Please <a href="Velocity%20Rentals/signin.php">Login</a> to rent
               </div>
             `;
           }
@@ -72,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="modern-card">
 
                 <div class="image-wrapper">
-                  <img src="${car.images ? 'uploads/' + car.images : 'default_car_image.jpg'}"
+                  <img src="${car.images ? 'Velocity%20Rentals/uploads/' + car.images : 'Velocity%20Rentals/default_car_image.jpg'}"
                        alt="${car.vehicle_model}">
                   <div class="price-badge">
                     ₹ ${car.rent_per_day} <span>/day</span>
