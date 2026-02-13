@@ -5,10 +5,9 @@ $password   = getenv("MYSQLPASSWORD");
 $dbname     = getenv("MYSQLDATABASE");
 $port       = getenv("MYSQLPORT");
 
-try {
-    $conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Database Connection Failed: " . $e->getMessage());
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
