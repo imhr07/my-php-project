@@ -2,7 +2,7 @@
 include_once "config.php";
 
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
-$limit = 3;
+$limit  = 3;
 
 $sql = "SELECT c.car_id,
                c.vehicle_model,
@@ -19,9 +19,13 @@ $sql = "SELECT c.car_id,
         ORDER BY c.car_id ASC
         LIMIT $offset, $limit";
 
-$stmt = $conn->query($sql);
+$result = $conn->query($sql);
 
-$cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$cars = [];
+
+while ($row = $result->fetch_assoc()) {
+    $cars[] = $row;
+}
 
 header('Content-Type: application/json');
 echo json_encode($cars);
